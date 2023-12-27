@@ -1,0 +1,11 @@
+Code implementation: 
+the model implemente une version miniature du modèle GPT (Generative Pre-Trained Transformer) pour la génération de texte à l'aide de l'API fonctionnelle Keras dans TensorFlow. Le modèle est conçu pour la modélisation du langage au niveau du mot, ce qui implique de prédire le prochain mot dans une séquence donnée à tous les mots précédents.
+
+Préparation des données: Le code télécharge et extrait d'abord le jeu de données IMDB, qui se compose de commentaires de films étiquetés comme positifs ou négatifs. Il crée un ensemble de données avec chaque examen comme un fichier texte distinct. Les données sont ensuite tokenisées, vectorialisées et préprocessées pour la modélisation linguistique.
+Architecture de modèle:
+La couche de TokenAndPositionEmbedding combine les embeddings de jetons et de positions en utilisant deux couches d'embeddings séparées pour les tokens et les positions.
+La couche TransformerBlock met en œuvre un seul bloc de transformateur, qui comprend des couches de réseau multi-tête et d'auto-attention.
+La fonction create_model construit le modèle GPT en miniature, qui se compose de la couche TokenAndPositionEmbedding, d'un TransformerBlock et d'une dernière couche dense pour la sortie.
+Formation: Le modèle est formé sur les données pré-traitées à l'aide de l'optimisateur Adam et de la perte de crossentropie catégorique sparse. Un rappel d'appel Keras personnalisé (TextGenerator) est utilisé pour générer du texte pendant l'entraînement après un nombre spécifié d'époques.
+Génération de texte: Le texteGénérateur de rappel tokenise un message de démarrage, le nourrit au modèle, prévoit les probabilités pour le token suivant, échantillonne le prochain token, et l'ajoute à l'entrée pour la prochaine prédiction. Ce processus est répété jusqu'à ce que le nombre souhaité de jetons soit généré.
+Dans l'ensemble, ce code démontre une mise en œuvre de base d'un modèle de langue basé sur les transformateurs pour la génération de texte en utilisant TensorFlow et Keras. Le texte généré peut être utilisé pour diverses tâches NLP, telles que la classification du texte, la résumation, et plus encore.
